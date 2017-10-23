@@ -14,10 +14,54 @@ var scores, roundScore, activePlayer, dice;
 scores = [0,0];
 roundScore = 0;
 activePlayer = 0;
-
-dice = Math.floor(Math.random() * 6) + 1;
-
-document.querySelector('#current-' + activePlayer).textContent = dice;
+dice = 0;
 
 document.querySelector('.dice').style.display = 'none';
+document.getElementById('score-0').textContent = '0';
+document.getElementById('score-1').textContent = '0';
+document.getElementById('current-0').textContent = '0';
+document.getElementById('current-1').textContent = '0';
+
+
+document.addEventListener("click", function roll(){
+            
+    dice = Math.floor(Math.random() * 6) + 1;
+
+    var diceDOM = document.querySelector('.dice');
+    diceDOM.style.display = "block";
+    diceDOM.src = "dice-" + dice + ".png";
+        
+    
+    /*switch(dice) {
+    
+         case 1:
+            document.querySelector(".dice").src = "dice-1.png";
+            break;
+        case 2:
+            document.querySelector(".dice").src = "dice-2.png";
+            break;
+        case 3:
+            document.querySelector(".dice").src = "dice-3.png";
+            break;
+        case 4:
+            document.querySelector(".dice").src = "dice-4.png";
+            break;
+        case 5:
+            document.querySelector(".dice").src = "dice-5.png";
+            break;
+        case 6:
+            document.querySelector(".dice").src = "dice-6.png";
+            break;
+        
+    }*/
+
+    document.querySelector('#current-' + activePlayer).textContent = dice;
+    
+});
+
+
+    
+    
+
+
 
