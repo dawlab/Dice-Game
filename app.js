@@ -9,31 +9,34 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, dice;
+var scores, roundScore, activePlayer, dice, gamePlaying;
 
 init();
 
 document.querySelector('.btn-roll').addEventListener("click", function(){
-            
-dice = Math.floor(Math.random() * 6) + 1;
 
-var diceDOM = document.querySelector('.dice');
-diceDOM.style.display = "block";
-diceDOM.src = "dice-" + dice + ".png";
+    if (gamePlaying) {
 
-if (dice !== 1) {
-    roundScore += dice;
-    //roundScore = roundScore + dice;
-    document.querySelector('#current-' + activePlayer).textContent = roundScore;    
- } else {
-     nextPlayer();
-}
-    
+        dice = Math.floor(Math.random() * 6) + 1;
+        
+        var diceDOM = document.querySelector('.dice');
+        diceDOM.style.display = "block";
+        diceDOM.src = "dice-" + dice + ".png";
+        
+        if (dice !== 1) {
+            roundScore += dice;
+            //roundScore = roundScore + dice;
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;    
+         } else {
+             nextPlayer();
+        }
+    }  
 });
 
 document.querySelector('.btn-hold').addEventListener('click', function() {
-    
-    //Add round score to global score
+
+    if (gamePlaying) {
+        //Add round score to global score
     scores[activePlayer] += roundScore;
     //scores[activePlayer] = scores[activePlayer] + roundScore;
 
@@ -46,11 +49,11 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
         document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
         document.querySelector('.dice').style.display = 'none';  
-        
+        gamePlaying = false;
     } else {
         nextPlayer();
     }
-
+    }
 } );
 
 
@@ -74,6 +77,7 @@ function init() {
     roundScore = 0;
     activePlayer = 0;
     dice = 0;
+    gamePlaying = true;
 
     document.querySelector('.dice').style.display = 'none';
 
