@@ -140,6 +140,26 @@ i {
 .btn-new { top: 45px;}
 .btn-roll { top: 403px;}
 .btn-hold { top: 467px;}
+.btn-submit { top: 550px;}
+
+.input-score {
+    display: block;
+    margin: auto;
+    margin-top: 520px;
+    position: absolute;
+    width: 200px;
+    right: 29%;
+    transform: translateX(-50%);
+    color: #555;
+    background: none;
+    font-family: Lato;
+    font-size: 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-weight: 300;
+    transition: background-color 0.3s, color 0.3s;
+    border: solid;
+}
 
 .dice {
     position: absolute;

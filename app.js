@@ -9,9 +9,11 @@ GAME RULES:
 
 */
 
-var scores, roundScore, activePlayer, dice, gamePlaying;
+var scores, roundScore, activePlayer, dice, gamePlaying, input;
 
 init();
+
+var lastDice;
 
 document.querySelector('.btn-roll').addEventListener("click", function(){
 
@@ -22,14 +24,21 @@ document.querySelector('.btn-roll').addEventListener("click", function(){
         var diceDOM = document.querySelector('.dice');
         diceDOM.style.display = "block";
         diceDOM.src = "dice-" + dice + ".png";
-        
-        if (dice !== 1) {
+
+        if (dice === 6 && lastDice === 6) {
+            scores[activePlayer] = 0;
+            document.querySelector('#score-' + activePlayer).textContent = '0';            
+            nextPlayer();
+        } else if (dice !== 1) {
             roundScore += dice;
             //roundScore = roundScore + dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;    
+            document.querySelector('#current-' + activePlayer).textContent = roundScore;
+        
          } else {
              nextPlayer();
         }
+
+        lastDice = dice;
     }  
 });
 
@@ -43,7 +52,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     // Update the UI
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
 
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= input ) {
 
         document.querySelector('#name-' + activePlayer).textContent = 'WINNER!';
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -53,7 +62,7 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
     } else {
         nextPlayer();
     }
-    }
+}
 } );
 
 
@@ -92,15 +101,10 @@ function init() {
     document.querySelector('.player-1-panel').classList.remove('winner');
     document.querySelector('.player-1-panel').classList.remove('active');
     document.querySelector('.player-0-panel').classList.add('active');
-    
-    
-    
-    
 }
 
-
-    
-
-
+document.querySelector('.btn-submit').addEventListener('click', function() {
+    input = document.querySelector('.input-score').value;
+});
 
 
