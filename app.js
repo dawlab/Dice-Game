@@ -27,7 +27,15 @@ document.querySelector('.btn-roll').addEventListener("click", function(){
 
         if (dice === 6 && lastDice === 6) {
             scores[activePlayer] = 0;
-            document.querySelector('#score-' + activePlayer).textContent = '0';            
+            document.querySelector('#score-' + activePlayer).textContent = '0';
+
+            document.querySelector('#message-box').style.display = 'inline';        
+            document.querySelector('.max-score-message').textContent = "Double 6 - your total score is 0!";        
+    
+            setTimeout(function () {
+                document.querySelector('#message-box').style.display = 'none';   
+            }, 1000);
+
             nextPlayer();
         } else if (dice !== 1) {
             roundScore += dice;
@@ -35,6 +43,13 @@ document.querySelector('.btn-roll').addEventListener("click", function(){
             document.querySelector('#current-' + activePlayer).textContent = roundScore;
         
          } else {
+            document.querySelector('#message-box').style.display = 'inline';        
+            document.querySelector('.max-score-message').textContent = "1 - next player!";     
+    
+            setTimeout(function () {
+                document.querySelector('#message-box').style.display = 'none';   
+            }, 1000);
+
              nextPlayer();
         }
 
@@ -51,8 +66,16 @@ document.querySelector('.btn-hold').addEventListener('click', function() {
 
     // Update the UI
     document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+    
+    var winningScore;
 
-    if (scores[activePlayer] >= input ) {
+    if (input) {
+        winningScore = input;
+    } else {
+        winningScore = 100;
+    }
+
+    if (scores[activePlayer] >= winningScore ) {
 
         document.querySelector('#name-' + activePlayer).textContent = 'WINNER!';
         document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
@@ -105,6 +128,13 @@ function init() {
 
 document.querySelector('.btn-submit').addEventListener('click', function() {
     input = document.querySelector('.input-score').value;
+
+        document.querySelector('#message-box').style.display = 'inline';        
+        document.querySelector('.max-score-message').textContent = "Max score is set to " + input;        
+
+        setTimeout(function () {
+            document.querySelector('#message-box').style.display = 'none';   
+        }, 1000);
 });
 
 
